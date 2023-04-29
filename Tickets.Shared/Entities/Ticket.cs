@@ -14,7 +14,7 @@ namespace Tickets.Shared.Entities
 
         [Display(Name = "Usada")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        public bool Used { get; set; }
+        public bool Used { get; set; } = false;
 
         [Display(Name = "Porteria")]
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
