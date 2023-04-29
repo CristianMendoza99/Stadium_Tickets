@@ -33,5 +33,50 @@ namespace Tickets.API.Controllers
             await _context.SaveChangesAsync();
             return Ok(tickets);
         }
+
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult> GetAsync(int id)
+        {
+            var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.Id == id);
+            if (ticket is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ticket);
+        }
+
+
+
+
+
+        [HttpPut]
+        public async Task<ActionResult> PutAsync(Ticket ticket)
+        {
+            _context.Update(ticket);
+            try
+            {
+
+                await _context.SaveChangesAsync();
+                return Ok(ticket);
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
+                {
+                    return BadRequest("Ya existe un registro con el mismo Id.");
+                }
+                else
+                {
+                    return BadRequest(dbUpdateException.InnerException.Message);
+                }
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+
+        }
     }
 }
