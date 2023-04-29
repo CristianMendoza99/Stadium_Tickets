@@ -27,7 +27,7 @@ namespace Web.Repositories
             var codigoEstatus = HttpResponseMessage.StatusCode;
             if (codigoEstatus == HttpStatusCode.NotFound)
             {
-                return "Recurso no encontrado";
+                return "Numero de boleta inválido, por favor corrige e intentalo nuevamente";
             }
             else if (codigoEstatus == HttpStatusCode.BadRequest)
             {

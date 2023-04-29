@@ -12,8 +12,8 @@ using Tickets.API.Data;
 namespace Tickets.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230429011101_InitialDb")]
-    partial class InitialDb
+    [Migration("20230429101414_UpdateEntities")]
+    partial class UpdateEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,10 @@ namespace Tickets.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Entrance")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
